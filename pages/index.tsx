@@ -3,9 +3,7 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
-import { getFirestore, collection, getDocs, doc, setDoc, query, orderBy } from "firebase/firestore";
-
-import styles from '../styles/Home.module.css'
+import { getFirestore, collection, getDocs, query, orderBy } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAYW3dB-uktGct6mEdXkj5yXHbNbZGxBmE",
@@ -17,15 +15,10 @@ const firebaseConfig = {
   measurementId: "G-D5EDWLPC4K"
 };
 const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
+if (app.name && typeof window !== 'undefined') {
+  const analytics = getAnalytics(app);
+}
 const db = getFirestore(app);
-
-// setDoc(doc(db, "songs", 'H4IWQT7FLrQZYAxCknGJ'), {
-//   album: "celebrai",
-//   number: "5",
-//   title: "A Solução",
-//   content: "Há ainda uma esperança Para mudar o nosso mundo. É fácil de encontrar, basta procurar... É algo que tudo supera, suporta e perdoa, Aumenta a paz e a comunhão. \n Há muito tempo existe a solução Mas muitos não descobriram Pois traz dignidade e compaixão. Vou lhes contar essa solução Para o mundo em que vivemos E ela nada mais é do que o amor.\n O amor, o amor de Deus. O amor tudo supera, perdoa e respeita. Sem ele o mundo não tem mais salvação. O amor tudo supera, perdoa e respeita. Amemos nosso irmão, como a nós mesmos. O amor de Deus é a solução. ",
-// });
 
 const Home: NextPage = ({ songs }: any) => {
 
@@ -101,13 +94,16 @@ export async function getStaticProps() {
   const querySnapshot = await getDocs(query(songsRef, orderBy('number', 'desc')));
   const songs: any[] = [];
   querySnapshot.forEach((doc) => {
-    songs.unshift(doc.data())
+    const song = doc.data();
+    song.open = false;
+    songs.unshift(song);
   });
 
   return {
     props: {
       songs,
     },
+    revalidate: 86400, // 1 day
   }
 }
 
