@@ -89,7 +89,7 @@ const Home: NextPage = ({ songs }: any) => {
       <footer class="footer has-text-centered">
         <p>
           Feito com <i class="fas fa-heart has-text-danger op-1"></i> por Hildor
-          <br><br>
+          <br/><br/>
           <a target="_blank" href="https://blog.hildor.com.br">
             <span class="icon">
               <i class="fa fa-rss-square"></i>
