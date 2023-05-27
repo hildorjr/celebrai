@@ -90,25 +90,25 @@ const Home: NextPage = ({ songs }: any) => {
         <p>
           Feito com <i className="fas fa-heart has-text-danger op-1"></i> por Hildor
           <br/><br/>
-          <a target="_blank" href="https://blog.hildor.com.br">
+          <a target="_blank" href="https://blog.hildor.com.br" rel="noreferrer">
             <span className="icon">
               <i className="fa fa-rss-square"></i>
             </span>
             Blog
           </a>
-          <a target="_blank" href="mailto:oi@hildor.com.br">
+          <a target="_blank" href="mailto:oi@hildor.com.br" rel="noreferrer">
             <span className="icon">
               <i className="fas fa-envelope"></i>
             </span>
             Email
           </a>
-          <a target="_blank" href="https://github.com/hildorjr">
+          <a target="_blank" href="https://github.com/hildorjr" rel="noreferrer">
             <span className="icon">
               <i className="fab fa-github"></i>
             </span>
             GitHub
           </a>
-          <a target="_blank" href="https://www.linkedin.com/in/hildor">
+          <a target="_blank" href="https://www.linkedin.com/in/hildor" rel="noreferrer">
             <span className="icon">
               <i className="fab fa-linkedin-in"></i>
             </span>
