@@ -1,9 +1,6 @@
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import {
-  getFirestore,
   collection,
   getDocs,
   doc,
@@ -13,27 +10,15 @@ import {
 } from "firebase/firestore";
 
 import styles from "../styles/Home.module.css";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAYW3dB-uktGct6mEdXkj5yXHbNbZGxBmE",
-  authDomain: "celebrai-faa05.firebaseapp.com",
-  projectId: "celebrai-faa05",
-  storageBucket: "celebrai-faa05.appspot.com",
-  messagingSenderId: "141637101977",
-  appId: "1:141637101977:web:332a620ecf48776b720b08",
-  measurementId: "G-D5EDWLPC4K",
-};
-const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
-const db = getFirestore(app);
+import { firebaseDb } from "../_app";
 
 const Create: NextPage = () => {
-  const [numberInput, setNumberInput] = useState<string>("");
+  const [numberInput, setNumberInput] = useState<number>();
   const [titleInput, setTitleInput] = useState<string>("");
   const [contentInput, setContentInput] = useState<string>("");
 
   const setNumber = (event: any) => {
-    setNumberInput(event.target.value);
+    setNumberInput(Number(event.target.value));
   };
   const setTitle = (event: any) => {
     setTitleInput(event.target.value);
@@ -54,7 +39,7 @@ const Create: NextPage = () => {
   };
 
   const insert = async () => {
-    await setDoc(doc(db, "songs", makeid(20)), {
+    await setDoc(doc(firebaseDb, "songs", makeid(20)), {
       album: "celebrai",
       number: numberInput,
       title: titleInput,

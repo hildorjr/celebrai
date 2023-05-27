@@ -1,30 +1,8 @@
 import type { NextPage } from "next";
 import { useCallback, useEffect, useState } from "react";
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import {
-  getFirestore,
-  collection,
-  getDocs,
-  query,
-  orderBy,
-} from "firebase/firestore";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import Script from "next/script";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAYW3dB-uktGct6mEdXkj5yXHbNbZGxBmE",
-  authDomain: "celebrai-faa05.firebaseapp.com",
-  projectId: "celebrai-faa05",
-  storageBucket: "celebrai-faa05.appspot.com",
-  messagingSenderId: "141637101977",
-  appId: "1:141637101977:web:332a620ecf48776b720b08",
-  measurementId: "G-D5EDWLPC4K",
-};
-const app = initializeApp(firebaseConfig);
-if (app.name && typeof window !== "undefined") {
-  const analytics = getAnalytics(app);
-}
-const db = getFirestore(app);
+import { firebaseDb } from "./_app";
 
 const Home: NextPage = ({ songs }: any) => {
   const [filteredSongs, setFilteredSongs] = useState<any[]>([]);
@@ -90,6 +68,20 @@ const Home: NextPage = ({ songs }: any) => {
               </div>
             </div>
           ))}
+          {!filteredSongs.length && (
+            <section className="hero is-large">
+              <div className="hero-body has-text-centered">
+                <p className="icon is-large">
+                  <span className="fa-stack fa-lg">
+                    <i className="fas fa-circle fa-stack-2x fa-inverse"></i>
+                    <i className="fas fa-slash fa-stack-1x"></i>
+                    <i className="fas fa-music fa-stack-1x"></i>
+                  </span>
+                </p>
+                <p className="subtitle">Não encontramos nenhuma música.</p>
+              </div>
+            </section>
+          )}
         </section>
       </main>
 
@@ -171,7 +163,7 @@ const Home: NextPage = ({ songs }: any) => {
 };
 
 export async function getStaticProps() {
-  const songsRef = collection(db, "songs");
+  const songsRef = collection(firebaseDb, "songs");
   const querySnapshot = await getDocs(
     query(songsRef, orderBy("number", "desc"))
   );
