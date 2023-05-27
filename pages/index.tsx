@@ -40,7 +40,7 @@ const Home: NextPage = ({ songs }: any) => {
 
   useEffect(() => {
     searchSongs();
-  }, [])
+  });
 
   return (
     <>
@@ -50,7 +50,7 @@ const Home: NextPage = ({ songs }: any) => {
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
-        <script src="https://kit.fontawesome.com/2796ccc163.js" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/2796ccc163.js" crossOrigin="anonymous" async></script>
       </Head>
 
       <main>
@@ -86,31 +86,31 @@ const Home: NextPage = ({ songs }: any) => {
         ) }
         </section>
       </main>
-      <footer class="footer has-text-centered">
+      <footer className="footer has-text-centered">
         <p>
-          Feito com <i class="fas fa-heart has-text-danger op-1"></i> por Hildor
+          Feito com <i className="fas fa-heart has-text-danger op-1"></i> por Hildor
           <br/><br/>
           <a target="_blank" href="https://blog.hildor.com.br">
-            <span class="icon">
-              <i class="fa fa-rss-square"></i>
+            <span className="icon">
+              <i className="fa fa-rss-square"></i>
             </span>
             Blog
           </a>
           <a target="_blank" href="mailto:oi@hildor.com.br">
-            <span class="icon">
-              <i class="fas fa-envelope"></i>
+            <span className="icon">
+              <i className="fas fa-envelope"></i>
             </span>
             Email
           </a>
-          <a target="_blank" href="https://github.com/hildorjr" rel="noreferrer">
-            <span class="icon">
-              <i class="fab fa-github"></i>
+          <a target="_blank" href="https://github.com/hildorjr">
+            <span className="icon">
+              <i className="fab fa-github"></i>
             </span>
             GitHub
           </a>
-          <a target="_blank" href="https://www.linkedin.com/in/hildor" rel="noreferrer">
-            <span class="icon">
-              <i class="fab fa-linkedin-in"></i>
+          <a target="_blank" href="https://www.linkedin.com/in/hildor">
+            <span className="icon">
+              <i className="fab fa-linkedin-in"></i>
             </span>
             LinkedIn
           </a>
